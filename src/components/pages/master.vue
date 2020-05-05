@@ -127,7 +127,7 @@
       v-if="passwordVisible"
       :visible.sync="passwordVisible"
       title="修改密码">
-      <changePassword></changePassword>
+      <changePassword @close="passwordVisible = false"></changePassword>
     </el-dialog>
     <el-dialog
       width="40%"

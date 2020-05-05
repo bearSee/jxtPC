@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-05-05 16:45:22
+ * @LastEditTime: 2020-05-05 16:51:13
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /nginx/Users/bear/Desktop/jxtPC/src/components/pages/changePassword.vue
+ -->
 <template>
   <div class="changePassword">
     <zte-form
@@ -17,17 +25,17 @@ export default {
     return {
       itemInfo: [
         {
-          code: '1',
+          code: 'oldPwd',
           label: '旧密码',
           type: 'password',
         },
         {
-          code: '2',
+          code: 'pwd1',
           label: '新密码',
           type: 'password',
         },
         {
-          code: '3',
+          code: 'pwd2',
           label: '确认密码',
           type: 'password',
         },
@@ -38,10 +46,10 @@ export default {
   },
   methods: {
     submit(form) {
-      const params = form;
-      this.$http.post('/', params).then(
+      this.$http.post('/my/resetPassword', form).then(
         () => {
           this.$message.success('保存成功');
+          this.$emit('close');
         },
         () => {},
       );
