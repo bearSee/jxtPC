@@ -8,7 +8,8 @@
       :form='form'
       cancelText="关闭"
       @reset="$emit('reset')"
-      @submit="handleSubmit">
+      @submit="handleSubmit"
+      submitText="发布">
       <!-- 选择行业按钮操作slot -->
       <template slot='receiveBotton'>
         <el-button type="primary" @click="getTreeData">选择行业</el-button>
