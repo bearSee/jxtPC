@@ -397,7 +397,8 @@ export default {
           min-height: 50px!important;
         }
         .el-form-item__content {
-          width: 890px!important;
+          width: calc(100% - 110px);
+          padding-right: 0!important;
         }
       }
       .address {

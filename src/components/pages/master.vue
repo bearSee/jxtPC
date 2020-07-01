@@ -800,7 +800,7 @@ export default {
       }
       .container_page {
         width: 100%;
-        height: calc(100vh - 107px);
+        // height: calc(100vh - 107px);
         padding-top: 10px;
         .container {
           height: 100%;

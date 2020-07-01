@@ -39,7 +39,7 @@
             <!-- <div class="font_btn" @click="loginVisible = true">立即加入</div> -->
           </div>
         </transition>
-        <img src="../../../assets/images/introduction_bg.png" class="head_img">
+        <img src="/image/introduction_bg.png" class="head_img">
         <!-- 登录表单 -->
         <transition>
           <div :class="`login-pad animated ${readyLogin ? 'fadeIn' : 'fadeOut'}`" v-show="readyLogin">

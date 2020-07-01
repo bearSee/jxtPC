@@ -787,7 +787,7 @@ export default {
     // }
   }
   .table-body {
-    flex: 1 1 auto;
+    flex: 1 1 100%;
     box-shadow: 0 4px 9px rgba($theme, .08);
     display: flex;
     flex-flow: column nowrap;

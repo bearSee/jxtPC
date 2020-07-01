@@ -52,7 +52,7 @@
         <i class="icon el-icon-refresh" @click="handlerRefresh"></i>
       </el-tooltip>
       <el-tooltip effect="dark" content="关闭当前标签页" placement="bottom-start">
-        <i class="icon el-icon-circle-close-outline" @click="hanlerClear"></i>
+        <i class="icon el-icon-error" @click="hanlerClear"></i>
       </el-tooltip>
     </span>
   </div>

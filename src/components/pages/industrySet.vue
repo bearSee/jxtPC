@@ -5,7 +5,7 @@
         <el-button size="mini" icon="el-icon-plus" class="addbtn" @click.native="createNewFa">添加根节点</el-button>
         <industryTree
           ref="industryTree"
-          treeUrl='industry/list'
+          treeUrl='industry/setting'
           :params='treeParams'
           :default-expand-all="false"
           @chooseNodeClick='chooseNodeClick'
