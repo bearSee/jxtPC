@@ -419,7 +419,7 @@ export default {
       const params = this.isEdit ? Object.assign(obj, { industryNewsId: this.industryNewsId }) : obj;
       this.$http.post(url, params).then(
         () => {
-          this.$message.success('保存成功');
+          this.$message.success('发布成功');
           this.detailDialogVisible = false;
           this.$refs.industryNews.getTableData();
         },

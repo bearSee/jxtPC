@@ -405,7 +405,7 @@ export default {
       const params = this.isEdit ? Object.assign(obj, { recruitmentNewsId: this.recruitmentNewsId }) : obj;
       this.$http.post(url, params).then(
         () => {
-          this.$message.success('保存成功');
+          this.$message.success('发布成功');
           this.detailDialogVisible = false;
           this.$refs.recruitmentNews.getTableData();
         },
