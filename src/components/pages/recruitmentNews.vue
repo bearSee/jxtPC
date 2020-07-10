@@ -25,11 +25,14 @@
       :visible.sync="detailDialogVisible"
       :title="`${isEdit ? '修改' : '发布'}${isPerson ? '应聘' : '招聘'}消息`">
       <publicForm
+        ref="publicForm"
         :disabled='disabled'
+        :hideReceiveOprate="hideReceiveOprate"
         :itemInfo='dialogItemInfo'
         :formData='dialogFormData'
         :industryData='industryData'
         :defaultMsg='defaultMsg'
+        @check-change="checkChange"
         @reset="detailDialogVisible = false"
         @submit='handleSubmit'>
       </publicForm>
@@ -320,9 +323,28 @@ export default {
       releaserForm: {},
     };
   },
-  created() {
-  },
   methods: {
+    checkChange(val, info) {
+      if (info.code === 'recruitmentProfessional') {
+        const { bizType } = info.options.find(({ key }) => key === val[0]);
+        // bizType为2隐藏岗位radio和行业选择
+        this.hideReceiveOprate = bizType === '2';
+        const receiveBottonIndex = this.dialogItemInfo.findIndex(({ code }) => code === 'receiveBotton');
+        const recruitmentPositionIndex = this.dialogItemInfo.findIndex(({ code }) => code === 'recruitmentPosition');
+        this.$set(this.dialogItemInfo[receiveBottonIndex], 'show', !this.hideReceiveOprate);
+        this.$set(this.dialogItemInfo[recruitmentPositionIndex], 'show', !this.hideReceiveOprate);
+
+        let form = {};
+        if (this.$refs.publicForm && this.$refs.publicForm.$refs.form) form = this.$refs.publicForm.$refs.form.currentForm || {};
+        if (this.hideReceiveOprate && this.$refs.publicForm) this.$refs.publicForm.receiveIndustryList = [];
+        this.dialogFormData = {
+          ...this.dialogFormData,
+          ...form,
+          bizType,
+          recruitmentPosition: this.hideReceiveOprate ? '' : form.recruitmentPosition,
+        };
+      }
+    },
     viewReleaserInfo(row) {
       const params = { userId: row.userId };
       this.$http.post('user/info', params).then(
@@ -371,6 +393,14 @@ export default {
             this.defaultMsg = formData.content;
             this.detailDialogVisible = true;
             this.isEdit = true;
+            this.$nextTick(() => {
+              // bizType为2隐藏岗位radio和行业选择
+              this.hideReceiveOprate = formData.bizType === '2';
+              const receiveBottonIndex = this.dialogItemInfo.findIndex(({ code }) => code === 'receiveBotton');
+              const recruitmentPositionIndex = this.dialogItemInfo.findIndex(({ code }) => code === 'recruitmentPosition');
+              this.$set(this.dialogItemInfo[receiveBottonIndex], 'show', !this.hideReceiveOprate);
+              this.$set(this.dialogItemInfo[recruitmentPositionIndex], 'show', !this.hideReceiveOprate);
+            });
           }
         },
         () => {},

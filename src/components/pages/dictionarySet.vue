@@ -126,6 +126,22 @@ export default {
           type: 'text',
           itemWidth: 100,
         },
+        {
+          code: 'bizType',
+          label: '业务类型',
+          type: 'select',
+          options: [
+            {
+              label: '1',
+              value: '1',
+            },
+            {
+              label: '2',
+              value: '2',
+            },
+          ],
+          itemWidth: 100,
+        },
       ],
       editData: {},
       isEdit: false,

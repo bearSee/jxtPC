@@ -2,11 +2,13 @@
   <div class="publicForm">
     <zte-form
       border
+      ref="form"
       class="dialogForm"
       :disabled='disabled'
       :itemInfo="itemInfo || defItemInfo"
       :form='form'
       cancelText="关闭"
+      @check-change="checkChange"
       @reset="$emit('reset')"
       @submit="handleSubmit"
       submitText="发布">
@@ -17,6 +19,7 @@
       <template slot='content'>
         <!-- 行业table -->
         <chooseIndustry
+          v-show="!hideReceiveOprate"
           :tableData='receiveIndustryList'
           :tableColumn='industryTableColumn'
           @delet='delet'
@@ -52,6 +55,10 @@ export default {
   components: { chooseIndustry, industryTree },
   props: {
     disabled: {
+      type: Boolean,
+      default: false,
+    },
+    hideReceiveOprate: {
       type: Boolean,
       default: false,
     },
@@ -230,7 +237,15 @@ export default {
     }, 300);
     this.receiveIndustryList = [...this.industryData, ...this.receiveIndustryList];
   },
+  watch: {
+    formData(value) {
+      this.form = value;
+    },
+  },
   methods: {
+    checkChange(val, info) {
+      this.$emit('check-change', val, info);
+    },
     // 获取行业
     getTreeData() {
       this.industryTreeVisible = true;
