@@ -490,10 +490,6 @@ export default {
     async logout() {
       await this.$http.post('/init/logout').then(
         () => {
-          this.$message({
-            message: '注销成功！',
-            type: 'success',
-          });
           this.$router.push('/');
           const ruleForm = window.localStorage.getItem('ruleForm');
           window.localStorage.clear();
