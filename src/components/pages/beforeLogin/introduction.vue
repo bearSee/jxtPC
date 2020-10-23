@@ -22,6 +22,26 @@
           </div>
         </div>
         <div class="btn_group">
+          <el-popover
+            class="qr-popover"
+            placement="bottom"
+            trigger="hover">
+            <!-- <img class="avatar-popover-qr" :src="cdn + 'qr.jpg'"> -->
+            <div class="qr-des">请扫码关注，接收重要通知</div>
+            <div class="qr-box">
+              <div class="img-box">
+                <img src="/image/xiaochengxu.jpeg">
+                <div>及信通小程序</div>
+              </div>
+              <div class="img-box">
+                <img src="/image/gongzhonghao.jpeg">
+                <div>及信通公众号</div>
+              </div>
+            </div>
+            <div slot="reference">
+              <img class="qr-icon" src="../../../assets/images/qr-icon.png">
+            </div>
+          </el-popover>
           <div @click="gotoLogin" class="btn_group_login">登录</div>
           <div @click="gotoRegister" class="btn_group_registe">注册</div>
           <!-- <div @click="loginVisible = true" class="btn_group_login">登录</div>
@@ -396,6 +416,8 @@ export default {
       fileVisible: false,
     };
   },
+  computed: {
+  },
   created() {
     const ruleForm = window.localStorage.getItem('ruleForm');
     if (ruleForm) {
@@ -603,7 +625,30 @@ export default {
 <style lang="scss">
 @import "../../../assets/scss/theme.scss";
 $font: #999;
-
+.el-popover {
+  .qr-box {
+    display: flex;
+    .img-box {
+      display: flex;
+      flex-direction: column;
+      width: 100px;
+      margin: 0 10px;
+      img {
+        width: 100px;
+        height: 100px;
+      }
+      div {
+        margin: 5px auto;
+        font-size: 12px;
+      }
+    }
+  }
+  .qr-des {
+    text-align: center;
+    margin: 10px 0;
+    color: #333;
+  }
+}
 .introduction {
   .introduction_box {
     width: 100%;
@@ -614,16 +659,13 @@ $font: #999;
     .introduction_head {
       height: 100%;
       width: 100%;
+      padding: 0 50px;
       background: #1C1A28;
-      position: relative;
+      display: flex;
+      justify-content: space-between;
       .head_info {
         color: #fff;
-        position: absolute;
-        left: 150px;
-        top: 50%;
-        transform: translate(0, -50%);
         display: flex;
-        width: 660px;
         justify-content: space-around;
         height: 100%;
         font-family: "微软雅黑";
@@ -654,12 +696,10 @@ $font: #999;
         }
       }
       .btn_group {
-        position: absolute;
-        right: 200px;
-        top: 50%;
-        transform: translate(0, -50%);
+        height: 32px;
+        margin: auto 0;
         color: #fff;
-        width: 130px;
+        width: 182px;
         display: flex;
         justify-content: space-between;
         .btn_group_registe, .btn_group_login {
@@ -667,6 +707,15 @@ $font: #999;
           border-radius: 3px;
           padding: 7px 13px;
           cursor: pointer;
+        }
+        .qr-popover {
+          height: 32px;
+          margin: auto 10px;
+          .qr-icon {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+          }
         }
       }
     }
@@ -1034,6 +1083,7 @@ $font: #999;
     .contentpage5 {
       height: 100%;
       padding-top: 150px;
+      margin-bottom: 45px;
       position: relative;
       font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
       .msgTitle {
